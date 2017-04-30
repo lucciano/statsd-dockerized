@@ -1,0 +1,19 @@
+version : "2.0"
+services:
+  backend_mysql : 
+     image : backend_mysql
+     build:
+        context: backend/mysql
+     volumes:
+        - ./backend/mysql:/opt/config
+     links:
+      - mysql:mysql
+  mysql:
+    environment:
+        MYSQL_USER: statsd
+        MYSQL_PASSWORD: 2uhyenoi2y0
+        MYSQL_ROOT_PASSWORD: 2uhyenoi2y0
+        MYSQL_DATABASE: statsd_db
+    volumes: 
+      - ./mysql/:/var/lib/mysql/
+    image: mysql:5.7 
