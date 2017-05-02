@@ -17,3 +17,14 @@ services:
     volumes: 
       - ./mysql/:/var/lib/mysql/
     image: mysql:5.7 
+
+
+  collectd:
+     image : collectd
+     build:
+        context: collectd
+     links:
+      - "backend_mysql:statsd"
+     volumes:
+        - ./collectd/collectd.conf:/etc/collectd.conf
+ 

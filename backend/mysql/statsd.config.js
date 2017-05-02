@@ -1,6 +1,9 @@
 {
-	"backends" : [ "./backends/console", "/opt/nodejs-statsd-mysql-backend/mysql-backend"],
-	"server" : "./servers/tcp",
+	"backends" : [ 
+		"./backends/console" 
+//,"/opt/nodejs-statsd-mysql-backend/mysql-backend"
+		],
+	"server" : "./servers/udp",
 	"address" : "0.0.0.0",
 	"port": 8125,
 	"debug" : true,

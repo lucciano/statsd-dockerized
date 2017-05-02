@@ -13,3 +13,5 @@ RUN cd /opt/smb ; npm install sequence
 
 RUN git clone https://github.com/etsy/statsd /opt/statsd
 RUN apt-get install -yq wget 
+
+CMD node /opt/statsd/stats.js /opt/config/statsd.config.js
