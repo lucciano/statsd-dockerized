@@ -7,6 +7,6 @@ run apt-get install -yq wget
 RUN n stable
 
 RUN git clone https://github.com/etsy/statsd /opt/statsd
-RUN npm install -g mongo-statsd-backend
+RUN wget https://raw.githubusercontent.com/dynmeth/mongo-statsd-backend/master/lib/index.js -O /opt/statsd/backend/mongodb.js
 
 CMD node /opt/statsd/stats.js /opt/config/statsd.config.js

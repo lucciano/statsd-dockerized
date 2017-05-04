@@ -1,6 +1,6 @@
 {
 	"backends" : [ 
-		"./backends/console" ,"mongo-statsd-backend/lib/index"
+		"./backends/console" ,"./backends/mongodb"
 		],
 	"server" : "./servers/udp",
 	"address" : "0.0.0.0",
@@ -15,6 +15,5 @@
 	"mongoPort": 27017,
 	"mongoMax": 2160, 
 	"mongoPrefix": true, 
-	"mongoName": 'statsd',
-}
+	"mongoName": 'statsd'
 }

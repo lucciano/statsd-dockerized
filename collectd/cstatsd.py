@@ -1,4 +1,4 @@
-#### a ripoff 
+#### a ripoff https://github.com/lyft/collectd-statsd
 import collectd
 import statsd
 client = statsd.StatsClient(

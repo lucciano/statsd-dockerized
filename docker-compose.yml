@@ -23,7 +23,7 @@ services:
      build:
         context: backend/mongodb
      volumes:
-        - ./backend/mongo:/opt/config
+        - ./backend/mongodb:/opt/config
      links:
       - mongodb:mongodb
 
