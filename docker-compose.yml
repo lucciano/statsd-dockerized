@@ -18,7 +18,16 @@ services:
 #      - ./mysql/:/var/lib/mysql/
 #    image: mysql:5.7 
 
-  backend_mongo: 
+  agent_statsd:
+     image : agent_statsd
+     build:
+        context: agent/statsd
+     links:
+      - backend_mongodb:statsd
+     volumes:
+        - ./agent/statsd:/opt/agent
+
+  backend_mongodb: 
      image : backend_mongodb
      build:
         context: backend/mongodb
