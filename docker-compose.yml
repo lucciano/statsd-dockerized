@@ -39,7 +39,7 @@ services:
   mongodb:
     volumes: 
       - ./mongodb:/data/db 
-    image: mongo:3.5.6 
+    image: mongo:2.6
 
 
 
