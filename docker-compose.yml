@@ -33,6 +33,7 @@ services:
         context: backend/mongodb
      volumes:
         - ./backend/mongodb:/opt/config
+        - backend/mongodb/mongodb.js:/opt/statsd/backends/mongodb.js
      links:
       - mongodb:mongodb
 
