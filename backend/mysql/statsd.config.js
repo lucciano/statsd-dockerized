@@ -1,7 +1,6 @@
 {
 	"backends" : [ 
-		"./backends/console" 
-//,"/opt/nodejs-statsd-mysql-backend/mysql-backend"
+		"./backends/console","/opt/nodejs-statsd-mysql-backend/mysql-backend"
 		],
 	"server" : "./servers/udp",
 	"address" : "0.0.0.0",

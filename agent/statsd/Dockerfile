@@ -6,4 +6,4 @@ run apt-get install -yq wget
 RUN apt-get install -yq python-dev
 RUN pip install statsd psutil
 
-#CMD node /opt/statsd/stats.js /opt/config/statsd.config.js
+CMD python /opt/agent/statsd-agent.py

@@ -1,31 +1,59 @@
 version : "2.0"
 services:
-#  backend_mysql : 
-#     image : backend_mysql
-#     build:
-#        context: backend/mysql
-#     volumes:
-#        - ./backend/mysql:/opt/config
-#     links:
-#      - mysql:mysql
-#  mysql:
-#    environment:
-#        MYSQL_USER: statsd
-#        MYSQL_PASSWORD: 2uhyenoi2y0
-#        MYSQL_ROOT_PASSWORD: 2uhyenoi2y0
-#        MYSQL_DATABASE: statsd_db
-#    volumes: 
-#      - ./mysql/:/var/lib/mysql/
-#    image: mysql:5.7 
 
   agent_statsd:
      image : agent_statsd
      build:
         context: agent/statsd
      links:
-      - backend_mongodb:statsd
+      - backend_proxy:statsd
      volumes:
         - ./agent/statsd:/opt/agent
+
+  backend_proxy : 
+     image : backend_proxy
+     build:
+        context: backend/proxy
+     links:
+      - backend_mysql
+      - backend_mongodb
+     volumes:
+        - ./backend/proxy:/opt/config
+ 
+  backend_mysql : 
+     image : backend_mysql
+     build:
+        context: backend/mysql
+     volumes:
+        - ./backend/mysql:/opt/config
+     links:
+      - mysql:mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - mysql:db
+    ports:
+      - 8080:80
+    environment:
+      MYSQL_ROOT_PASSWORD: 2uhyenoi2y0
+
+  mysql:
+    environment:
+        MYSQL_USER: statsd
+        MYSQL_PASSWORD: 2uhyenoi2y0
+        MYSQL_ROOT_PASSWORD: 2uhyenoi2y0
+        MYSQL_DATABASE: statsd_db
+    volumes: 
+      - ./mysql/:/var/lib/mysql/
+    image: mysql:5.7 
+
+  mongo_express:
+    image: mongo-express
+    ports:
+      - 8081:8081
+    links:
+      - mongodb:mongo
 
   backend_mongodb: 
      image : backend_mongodb
@@ -33,14 +61,14 @@ services:
         context: backend/mongodb
      volumes:
         - ./backend/mongodb:/opt/config
-        - backend/mongodb/mongodb.js:/opt/statsd/backends/mongodb.js
+        - ./backend/mongodb/mongodb.js:/opt/statsd/backends/mongodb.js
      links:
       - mongodb:mongodb
 
   mongodb:
     volumes: 
       - ./mongodb:/data/db 
-    image: mongo:2.6
+    image: mongo:3.4
 
 
 
