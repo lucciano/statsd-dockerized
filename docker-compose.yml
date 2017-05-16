@@ -1,6 +1,5 @@
 version : "2.0"
 services:
-
   agent_statsd:
      image : agent_statsd
      build:
@@ -69,8 +68,28 @@ services:
     volumes: 
       - ./mongodb:/data/db 
     image: mongo:3.4
+  
+  grafana:
+    image: grafana
+    build:
+     context: grafana
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: "queRini6"
+    volumes: 
+    - ./grafana:/var/lib/grafana/dashboards
+    links:
+      - datasource_mysql
+      #- datasource_mongodb
+    ports:
+    - 3000:3000
 
-
+  datasource_mysql:
+    image : datasource_mysql
+    build:
+      context: datasource/mysql
+    volumes: 
+     - ./datasource/mysql:/opt/datasource
+ 
 
 
 #  collectd:
